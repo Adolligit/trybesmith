@@ -8,7 +8,7 @@ export default class ProductModel {
 
   public async create(product: Product): Promise<Product> {
     const { name, amount } = product;
-    const query = 'INSERT INTO TrybeSmith.Products VALUES (null, ?, ?, null)';
+    const query = 'INSERT INTO Trybesmith.Products VALUES (null, ?, ?, null)';
 
     const [result]: [ResultSetHeader, FieldPacket[]] = await this.connection
       .execute(query, [name, amount]);
