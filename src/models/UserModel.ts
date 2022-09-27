@@ -6,15 +6,15 @@ export default class UserModel {
   
   public constructor(connection: Pool) { this.connection = connection; }
 
-  public async create(product: User): Promise<User> {
-    const { name, amount } = product;
-    const query = 'INSERT INTO Trybesmith.Products VALUES (null, ?, ?, null)';
+  public async create(user: User): Promise<User> {
+    const { username, classe, level, password } = user;
+    const query = 'INSERT INTO Trybesmith.Users VALUES (null, ?, ?, ?, ?)';
 
     const [result]: [ResultSetHeader, FieldPacket[]] = await this.connection
-      .execute(query, [name, amount]);
+      .execute(query, [username, classe, level, password]);
     const { insertId } = result;
 
-    return { id: insertId, ...product };
+    return { id: insertId, ...user };
   }
 
   // public async all() {
