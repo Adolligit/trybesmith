@@ -6,7 +6,7 @@ const schema: ObjectSchema = Joi.object({
   amount: Joi.string().min(3).required(),
 });
 
-export default function Usernvalidate(req: Request, res: Response, next: NextFunction) {
+export default function ProductValidate(req: Request, res: Response, next: NextFunction) {
   const { error }: ValidationResult = schema.validate(req.body);
   
   if (error) {
