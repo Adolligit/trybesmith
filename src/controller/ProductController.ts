@@ -3,17 +3,19 @@ import Product from '../interfaces/IProduct';
 import ProductService from '../services/ProductService';
 
 export default class ProductController {
-  public static async create(req: Request, res: Response): Promise<Response<Product | string>> {
-    const productService: ProductService = new ProductService();
+  private static productService: ProductService = new ProductService();
+
+  public static create = async (req: Request, res: Response): 
+  Promise<Response<Product | string>> => {
     const { name, amount } = req.body;
     const product: Product = { name, amount };
 
-    const created:Product = await productService.create(product);
+    const created:Product = await this.productService.create(product);
 
     if (!created) {
       return res.status(401).json({ message: 'Algum errro!' });
     }
 
     return res.status(201).json(created);
-  }
+  };
 }
