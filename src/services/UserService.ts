@@ -3,7 +3,7 @@ import User from '../interfaces/IUser';
 import UserModel from '../models/UserModel';
 import GenerateToken from '../utils/GenerateToken';
 
-export default class ProductService {
+export default class OrderService {
   private userModel: UserModel;
 
   public constructor() { this.userModel = new UserModel(connection); }
