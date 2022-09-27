@@ -1,26 +1,16 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
 
 export default class GenerateToken {
-  private algorithm = 'HS256';
-  
-  private payload: object;
-  
-  private secret: string;
-  
-  private time: number | string;
+  private static algorithm = 'HS256';
 
-  public constructor(secret: string, payload: object, time: number | string) {
-    this.secret = secret;
-    this.payload = payload;
-    this.time = time;
-  }
+  private static secret = 'المملكة العربية السعودية';
 
-  public generate(): string {
+  public static generate(payload:object, time: number | string): string {
     const config:SignOptions = {
       algorithm: 'HS256',
-      expiresIn: 32,
+      expiresIn: time,
     };
     
-    return jwt.sign(this.payload, this.secret, config);
+    return jwt.sign(payload, this.secret, config);
   }
 }
