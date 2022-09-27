@@ -9,14 +9,8 @@ export default class OrderService {
   public constructor() { this.userModel = new UserModel(connection); }
 
   public async create(user: User): Promise<string> {
-    const created: User = await this.userModel.create(user);
-    
-    const generateToken = new GenerateToken('المملكة العربية السعودية', created, '1d');
+    const created: User = await this.userModel.create(user);    
 
-    return generateToken.generate();
+    return GenerateToken.generate(created, '1d');
   }
-  
-  // public all() {
-  //   return this.userModel.all();
-  // }
 }

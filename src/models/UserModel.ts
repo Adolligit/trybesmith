@@ -18,7 +18,7 @@ export default class UserModel {
   }
 
   // public async all() {
-  //   const query = 'SELECT * FROM Trybesmith.Products';
+  //   const query = 'SELECT * FROM Trybesmith.Users';
 
   //   const [result]: [ResultSetHeader, FieldPacket[]] = await this.connection.execute(query);
 
