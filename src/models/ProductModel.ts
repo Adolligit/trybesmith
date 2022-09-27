@@ -3,7 +3,7 @@ import Product from '../interfaces/IProduct';
 
 export default class ProductModel {
   private connection: Pool;
-
+  
   public constructor(connection: Pool) { this.connection = connection; }
 
   public async create(product: Product): Promise<Product> {
@@ -15,5 +15,13 @@ export default class ProductModel {
     const { insertId } = result;
 
     return { id: insertId, ...product };
+  }
+
+  public async all() {
+    const query = 'SELECT * FROM Trybesmith.products';
+
+    const [result]: [ResultSetHeader, FieldPacket[]] = await this.connection.execute(query);
+
+    return result;
   }
 }

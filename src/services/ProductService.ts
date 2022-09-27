@@ -12,4 +12,8 @@ export default class ProductService {
 
     return created;
   }
+  
+  public all() {
+    return this.productModel.all();
+  }
 }
