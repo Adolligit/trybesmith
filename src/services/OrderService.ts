@@ -6,9 +6,7 @@ export default class OrderService {
 
   public constructor() { this.orderModel = new OrderModel(connection); }
   
-  public async all() {
-    // const result = await this.orderModel.all();    
-    
+  public all() {
     return this.orderModel.all();
   }
 }
