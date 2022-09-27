@@ -18,7 +18,7 @@ export default class ProductModel {
   }
 
   public async all() {
-    const query = 'SELECT * FROM Trybesmith.products';
+    const query = 'SELECT * FROM Trybesmith.Products';
 
     const [result]: [ResultSetHeader, FieldPacket[]] = await this.connection.execute(query);
 
