@@ -9,4 +9,8 @@ export default class OrderService {
   public all() {
     return this.orderModel.all();
   }
+
+  public async create(userId: number, productsIds: Array<number>): Promise<object> {
+    return this.orderModel.create(userId, productsIds);
+  }
 }

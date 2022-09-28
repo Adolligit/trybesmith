@@ -9,4 +9,13 @@ export default class OrderController {
   
     return res.status(200).json(orders);
   };
+
+  public static create = async (req: Request, res: Response) => {
+    const { productsIds } = req.body;
+    const { decode } = res.locals;
+    
+    const result = await this.orderService.create(decode.id, productsIds);
+    
+    res.status(201).json(result);
+  };
 }

@@ -13,4 +13,8 @@ export default class GenerateToken {
     
     return jwt.sign(payload, this.secret, config);
   }
+
+  public static validate(token: string) {
+    return jwt.verify(token, this.secret);
+  }
 }

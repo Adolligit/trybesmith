@@ -22,4 +22,18 @@ export default class OrderModel {
 
     return result;
   }
+
+  public async create(userId:number, productsIds: Array<number>): Promise<object> {
+    const insertQuery = 'INSERT INTO Trybesmith.Orders VALUES (null, ?)';
+    const updateQuery = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
+
+    const [{ insertId: id }]: [ResultSetHeader, FieldPacket[]] = await this
+      .connection.execute<ResultSetHeader>(insertQuery, [userId]);
+
+    productsIds.forEach(async (productId) => {
+      await this.connection.execute(updateQuery, [id, productId]);
+    });
+
+    return { userId, productsIds };
+  }
 }
