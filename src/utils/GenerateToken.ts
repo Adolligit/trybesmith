@@ -3,7 +3,7 @@ import jwt, { SignOptions } from 'jsonwebtoken';
 export default class GenerateToken {
   private static algorithm = 'HS256';
 
-  private static secret = 'المملكة العربية السعودية';
+  private static secret = process.env.JWT_SECRET || 'المملكة العربية السعودية';
 
   public static generate(payload:object, time: number | string): string {
     const config:SignOptions = {
