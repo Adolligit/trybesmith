@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import httpStatus from 'http-status';
 import Joi, { ObjectSchema, ValidationResult } from 'joi';
 
 const schema: ObjectSchema = Joi.object({
@@ -9,7 +10,7 @@ const schema: ObjectSchema = Joi.object({
 export default function Loginvalidate(req: Request, res: Response, next: NextFunction) {
   const { error }: ValidationResult = schema.validate(req.body);
 
-  if (error) return res.status(400).json({ message: error.message });
+  if (error) return res.status(httpStatus.BAD_REQUEST).json({ message: error.message });
   
   next();
 }

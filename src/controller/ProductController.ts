@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import httpStatus from 'http-status'
 import Product from '../interfaces/IProduct';
 import ProductService from '../services/ProductService';
 
@@ -12,7 +13,7 @@ export default class ProductController {
     const created:Product = await this.productService.create(product);
 
     if (!created) {
-      return res.status(401).json({ message: 'Algum erro!' });
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Algum erro!' });
     }
 
     return res.status(201).json(created);
@@ -20,7 +21,7 @@ export default class ProductController {
 
   public static all = async (req: Request, res: Response) => {
     const products = await this.productService.all();
-  
-    return res.status(200).json(products);
+
+    return res.status(httpStatus.OK).json(products);
   };
 }

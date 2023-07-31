@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import httpStatus from 'http-status';
 import Joi, { ObjectSchema, ValidationResult } from 'joi';
 
 const schema: ObjectSchema = Joi.object({
@@ -14,7 +15,7 @@ export default function OrderValidation(req: Request, res: Response, next: NextF
   if (error) {
     const { type } = error.details[0];
     
-    const status: number = (type === 'any.required') ? 400 : 422;
+    const status: number = (type === 'any.required') ? httpStatus.BAD_REQUEST : httpStatus.UNPROCESSABLE_ENTITY;
 
     // Essa condição ridícula para atender ao requisito da Trybe. :)
     if (type.includes('includesRequiredUnknowns')) {

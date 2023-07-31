@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Login from '../interfaces/ILogin';
 import LoginServer from '../services/LoginService';
+import httpStatus from 'http-status';
 
 export default class LoginController {
   private static loginService: LoginServer = new LoginServer();
@@ -11,9 +12,9 @@ export default class LoginController {
     const token = await this.loginService.create({ username, password });
 
     if (!token) {
-      return res.status(401).json({ message: 'Username or password invalid' });
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Username or password invalid' });
     }
   
-    return res.status(200).json({ token });
+    return res.status(httpStatus.OK).json({ token });
   };
 }
