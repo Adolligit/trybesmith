@@ -12,7 +12,7 @@ export default class ProductController {
     const created:Product = await this.productService.create(product);
 
     if (!created) {
-      return res.status(401).json({ message: 'Algum errro!' });
+      return res.status(401).json({ message: 'Algum erro!' });
     }
 
     return res.status(201).json(created);
