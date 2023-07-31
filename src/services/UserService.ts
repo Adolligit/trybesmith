@@ -11,6 +11,6 @@ export default class OrderService {
   public async create(user: User): Promise<string> {
     const created: User = await this.userModel.create(user);    
 
-    return GenerateToken.generate(created, '1d');
+    return GenerateToken.generate(created, '540s');
   }
 }
