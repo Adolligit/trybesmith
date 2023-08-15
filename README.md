@@ -58,26 +58,9 @@ Escolha uma das instalações a seguir:
     <li>MySQL: v8</li>
 </ul>
 
-  1. Crie um arquivo **.env** na pasta raiz e declare as variáveis de ambiente:
-   ```bash
-   touch .env
-   ```
-   2. Abra o arquivo **.env** e então copie e cole as informações a seguir:
-      ```bash
-        # db
-        MYSQL_HOST=127.0.0.1
-        MYSQL_PORT=3306
-        MYSQL_USER=root
-        MYSQL_PASSWORD=
-        MYSQL_NAME=Trybesmith
-
-        # api
-        API_PORT=3000
-
-        # token
-        JWT_SECRET=
-      ```
-  3. No arquivo **.env**, informe seus dados de acesso ao banco de dados MySQL nas chaves: **MYSQL_USER**, **MYSQL_PASSWORD**. Altere também o valor da chave **JWT_SECRET** inserindo uma senha para criar o Token (lembre-se de salvar o arquivo).
+  1. Renomeie o arquivo **.env.example**, que esta na pasta raiz, para **.env**.
+  2. No arquivo **.env**, informe seus dados de acesso ao banco de dados MySQL nas chaves: **MYSQL_USER** e **MYSQL_PASSWORD**.
+  3. Altere o valor da chave **JWT_SECRET** inserindo uma senha que será utilizada para criar o token de autenticação (lembre-se de salvar o arquivo **.env**).
   ---
 </details>
 
