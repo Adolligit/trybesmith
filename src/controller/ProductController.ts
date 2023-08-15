@@ -16,7 +16,7 @@ export default class ProductController {
       return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Algum erro!' });
     }
 
-    return res.status(201).json(created);
+    return res.status(httpStatus.CREATED).json(created);
   };
 
   public static all = async (req: Request, res: Response) => {
