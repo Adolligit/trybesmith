@@ -44,7 +44,9 @@
     "joi": "17.6.0",
     "jsonwebtoken": "8.5.1",
     "mysql2": "2.3.0",
+    "swagger-ui": "^5.3.2",
     "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.1",
     "yaml": "^2.3.1"
   }
 }

@@ -1,0 +1,20 @@
+openapi: 3.0.1
+info:
+  title: Trybesmith
+  description: Esta é uma API criada para o entendimento da autenticação do usuário com o token JWT.
+  version: 1.0.0
+  contact: 
+    name: Adelson
+    url: https://www.linkedin.com/in/adelson-lima/
+servers:
+  - url: http://127.0.0.1:3000/v1
+    description: 3000 é referente ao valor da variável API_PORT do arquivo '.env.example'
+paths:
+  /users:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              
