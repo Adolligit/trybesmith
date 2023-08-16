@@ -12,9 +12,386 @@ servers:
 paths:
   /users:
     post:
+      tags:
+        - User
+      summary: Irá criar um  usuário.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              
+              type: object
+              required:
+                - username
+                - classe
+                - level
+                - password
+              properties:
+                username:
+                  type: string
+                classe:
+                  type: string
+                level:
+                  type: number
+                password:
+                  type: string
+            examples:
+              1:
+                value:
+                  username: reigal
+                  classe: Guerreiro
+                  level: 10
+                  password: 1dragaonoceu
+              2:
+                value:
+                  username: yraa
+                  classe: Ladina
+                  level: 5
+                  password: valarmorg
+              3:
+                value:
+                  username: vyrion
+                  classe: Inventor
+                  level: 8
+                  password: pagandodividas
+      responses:
+        201:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+        422:
+          $ref: '#/components/responses/422'
+  /login:
+    post:
+      tags:
+        - Login
+      summary: Irá autenticar o usuário.
+      description: O usuário será autenticado e um token será retornado para uso posterior.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+            examples:
+              1:
+                value:
+                  username: reigal
+                  password: 1dragaonoceu
+              2:
+                value:
+                  username: yraa
+                  password: valarmorg
+              3:
+                value:
+                  username: vyrion
+                  password: pagandodividas
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+        400:
+          $ref: '#/components/responses/400'
+  /products:
+    post:
+      tags:
+        - Product
+      summary: Irá criar o registro de um produto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - amount
+              properties:
+                name:
+                  type: string
+                amount:
+                  type: string
+            examples:
+              1:
+                value:
+                  username: Espada curta
+                  password: 10 peças de ouro
+              2:
+                value:
+                  username: Escudo desnecessariamente grande
+                  password: 20 peças de ouro
+              3:
+                value:
+                  username: Engenhoca aleatória
+                  password: 15 peças de ouro
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  amount:
+                    type: string
+              example:
+                id: 6
+                name: Tênis da Nike medieval
+                amount: 30 de ouro
+
+        400:
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                "Não informar 'amount'":
+                  value:
+                    "message": "\"amount\" is required"
+                "Não informar 'name'":
+                  value:
+                    "message": "\"name\" is required"
+        422:
+            description: UNPROCESSABLE_ENTITY
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                examples:
+                  "'amount' esta vazio":
+                    value:
+                      "message": "\"amount\" is not allowed to be empty"
+                  "'name' esta vazio":
+                    value:
+                      "message": "\"name\" is not allowed to be empty"
+    get:
+      tags:
+        - Product
+      summary: Irá retornar todos os registros de todos os produtos.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    amount: 
+                      type: string
+                    orderId: 
+                      type: number
+              example:
+                [
+                  {
+                      "id": 1,
+                      "name": "Espada curta",
+                      "amount": "10 peças de ouro",
+                      "orderId": null
+                  },
+                  {
+                      "id": 2,
+                      "name": "Escudo desnecessariamente grande",
+                      "amount": "20 peças de ouro",
+                      "orderId": 1
+                  },
+                ]
+  /orders:
+    get:
+      tags:
+        - Order
+      summary: Todos os pedidos registrados serão retornados.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    userId:
+                      type: number
+                    productsId:
+                      type: array
+                      items:
+                        type: number
+              example:
+                [
+                  {
+                      "id": 1,
+                      "userId": 1,
+                      "productsIds": [2]
+                  },
+                  {
+                      "id": 3,
+                      "userId": 2,
+                      "productsIds": [5, 4]
+                  },
+                ]
+    post:
+      tags:
+        - Order
+      summary: Vai cadastrar um pedido.
+      description: Para registrar um novo pedido, você deve primeiro inserir o token gerado no momento da criação do usuário, ou quando você fez Login, clicando no ícone verde, no canto superior, denominado 'Authorize'. Não é possível fazer registro de um novo pedido sem o token.
+      security:
+        - token_jwt: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - productsId
+              properties:
+                productsId:
+                  type: array
+                  items:
+                    type: number
+            examples:
+              1:
+                value:
+                  {
+                    "productsIds": [1,2]
+                  }
+              2:
+                value:
+                  {
+                    "productsIds": [3]
+                  }
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: number
+                  productsIds:
+                    type: array
+                    items:
+                      type: number
+              example:
+                {
+                  "userId": 5,
+                  "productsIds": [
+                      1,
+                      2
+                  ]
+                }
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                "Token inválido":
+                  value:
+                    {
+                      "message": "Invalid token"
+                    }
+                "Token não encontrado":
+                  value:
+                    {
+                      "message": "Token not found"
+                    }
+
+components:
+  securitySchemes:
+    token_jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    token:
+      type: object
+      properties:
+        token:
+          type: string
+      example:
+        $ref: '#/components/examples/token'
+        
+    error:
+      type: object
+      properties:
+        message: 
+          type: string
+  
+
+  examples:
+    token:
+      value:
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJBZGVsc29uIiwiY2xhc3NlIjoiQ29tbyBhc3NpbT8iLCJsZXZlbCI6MywicGFzc3dvcmQiOiJlc3NhIGFxdWkiLCJpYXQiOjE2OTIyMDY1MDAsImV4cCI6MTY5MjI5MjkwMH0.oKW79_qgus3iCU-ghpjPar5XTmGAxdBCvRPQaAf6Lio"
+
+  
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf: 
+              - $ref: '#/components/schemas/token'
+          
+
+    400:
+      description: BAD_REQUEST
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          examples:
+            'Não informar "password"':
+              value:
+                  "message": "\"password\" is required"
+            'Não informar "username"':
+              value:
+                "message": "\"username\" is required"
+
+    422:
+      description: UNPROCESSABLE_ENTITY
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          examples:
+            'Level abaixo de 1':
+              value:
+                "message": "\"level\" must be greater than or equal to 1"
+            '"password" < 8 caracteres':
+              value:
+                "message": "\"password\" length must be at least 8 characters long"
