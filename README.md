@@ -95,7 +95,7 @@ npm run reset
 ```
 ## Quais são as rotas desta API?
 Deixei uma documentação feita com [Swagger UI](https://swagger.io/tools/swagger-ui/) para facilitar e lhe orientar no uso da API. Você pode acessa-la em [http://127.0.0.1:3000/v1/docs/](http://127.0.0.1:3000/v1/docs/).
-<img align="center" alt="gif de demonstração de uso" src="https://raw.githubusercontent.com/Adolligit/store-manager/main/img/1.gif">
+<img align="center" alt="gif de demonstração de uso" src="https://raw.githubusercontent.com/Adolligit/trybesmith/main/img/1.gif">
 
 ## Linguagens e ferramentas:
 <div>
