@@ -1,6 +1,6 @@
+import httpStatus from 'http-status';
 import { Request, Response } from 'express';
 import OrderService from '../services/OrderService';
-import httpStatus from 'http-status';
 
 export default class OrderController {
   private static orderService: OrderService = new OrderService();

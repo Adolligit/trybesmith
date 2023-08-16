@@ -15,7 +15,11 @@ export default function UserValidation(req: Request, res: Response, next: NextFu
   if (error) {
     const { type } = error.details[0];
     
-    const status: number = (type === 'any.required') ? httpStatus.BAD_REQUEST : httpStatus.UNPROCESSABLE_ENTITY;
+    const status: number = (
+      type === 'any.required' 
+        ? httpStatus.BAD_REQUEST 
+        : httpStatus.UNPROCESSABLE_ENTITY
+    );
 
     return res.status(status).json({ message: error.message });
   }

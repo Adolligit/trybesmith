@@ -1,7 +1,7 @@
+import httpStatus from 'http-status';
 import { Request, Response } from 'express';
 import Login from '../interfaces/ILogin';
 import LoginServer from '../services/LoginService';
-import httpStatus from 'http-status';
 
 export default class LoginController {
   private static loginService: LoginServer = new LoginServer();

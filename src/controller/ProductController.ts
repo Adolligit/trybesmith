@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import httpStatus from 'http-status'
+import httpStatus from 'http-status';
 import Product from '../interfaces/IProduct';
 import ProductService from '../services/ProductService';
 

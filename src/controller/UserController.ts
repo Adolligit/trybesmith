@@ -1,7 +1,7 @@
+import httpStatus from 'http-status';
 import { Request, Response } from 'express';
 import User from '../interfaces/IUser';
 import UserService from '../services/UserService';
-import httpStatus from 'http-status';
 
 export default class UserController {
   private static userService: UserService = new UserService();

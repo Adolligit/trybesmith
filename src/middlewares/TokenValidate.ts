@@ -1,11 +1,13 @@
+import httpStatus from 'http-status';
 import { NextFunction, Request, Response } from 'express';
 import GenerateToken from '../utils/GenerateToken';
-import httpStatus from 'http-status';
 
 export default function TokenValidation(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;
 
-  if (!authorization) return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Token not found' });
+  if (!authorization) {
+    return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Token not found' });
+  }
 
   try {
     const decode = GenerateToken.validate(authorization);
